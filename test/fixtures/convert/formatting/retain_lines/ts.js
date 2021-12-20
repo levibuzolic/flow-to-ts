@@ -13,5 +13,22 @@ type Another = {
 function Hello() {
   const example = 1;
 
-  return null;
+  if (example === 1) {
+    return null;
+  } else {
+    return null;
+  }
+}
+
+class Example {
+  another: number;
+  property: string = "testing";
+
+  constructor() {
+    property = "updated";
+  }
+
+  classFunction = () => {
+    this.another = 1;
+  };
 }
