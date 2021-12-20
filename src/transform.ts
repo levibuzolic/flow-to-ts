@@ -32,7 +32,32 @@ const transformFunction = (path) => {
   }
 };
 
+const retainLines = (path, state) => {
+  if (!state.options.retainLines || path.node.type === "ObjectProperty") return;
+  const previous = path.getPrevSibling();
+  if (previous == null || previous.node == null || previous.node.loc == null)
+    return;
+  let newlines = path.node.loc.start.line - previous.node.loc.end.line - 1;
+  if (newlines > 0) path.insertBefore(t.noop());
+};
+
+const newlineTypesKey = [
+  "BlockParent",
+  "Conditional",
+  "Declaration",
+  "Expression",
+  "Function",
+  "FunctionParent",
+  "Literal",
+  "Property",
+  "Pureish",
+  "Scopable",
+  "Statement",
+  "TypeAlias",
+].join("|");
+
 export const transform = {
+  [newlineTypesKey]: retainLines,
   Program: {
     enter(path, state) {
       const { body } = path.node;
