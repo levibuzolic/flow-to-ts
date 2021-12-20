@@ -1,0 +1,11 @@
+{
+  "parser": "typescript",
+  "overrides": [
+    {
+      "files": ["test/fixtures/**/flow.js"],
+      "options": {
+        "parser": "flow"
+      }
+    }
+  ]
+}
