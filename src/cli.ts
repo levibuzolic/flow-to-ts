@@ -75,6 +75,7 @@ export const cli = (argv) => {
       printWidth: parseInt(program.printWidth),
     },
     retainLines: Boolean(program.retainLines),
+    progress: Boolean(program.progress),
   } as Options;
 
   if (options.prettier) {
@@ -98,7 +99,11 @@ export const cli = (argv) => {
     }
   }
 
-  for (const file of files) {
+  for (const [index, file] of files.entries()) {
+    if (options.progress) {
+      console.log(`Converting ${index + 1} of ${files.size} - ${file}`);
+    }
+
     const inFile = file;
     const inCode = fs.readFileSync(inFile, "utf-8");
 
