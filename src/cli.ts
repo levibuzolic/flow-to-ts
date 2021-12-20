@@ -48,10 +48,7 @@ export const cli = (argv) => {
       "avoid"
     )
     .option("--print-width [width]", "line width (depends on --prettier)", 80)
-    .option(
-      "--retain-lines",
-      "have babel try to retain original line numbers which may help preserve whitespace (recommended to be used with --prettier)"
-    )
+    .option("--retain-lines", "preserve whitespace, defaults to 'false'")
     .option("--write", "write output to disk instead of STDOUT")
     .option("--delete-source", "delete the source file");
 
