@@ -11,5 +11,6 @@ export type Options = {
     printWidth: number;
   };
   retainLines: boolean;
+  progress: boolean;
   debug: boolean;
 };
