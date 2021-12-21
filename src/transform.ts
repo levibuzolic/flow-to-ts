@@ -32,9 +32,9 @@ const transformFunction = (path) => {
   }
 };
 
-const SKIP = ["ObjectMethod", "ObjectProperty", "ObjectMember"];
 const retainLines = (path, state) => {
-  if (!state.options.retainLines || SKIP.includes(path.node.type)) return;
+  if (!state.options.retainLines) return;
+  if (path.listKey !== "body" && path.listKey != null) return;
   const previous = path.getPrevSibling();
   if (previous == null || previous.node == null || previous.node.loc == null)
     return;
@@ -50,9 +50,9 @@ const newlineTypesKey = [
   "Scopable",
   "BlockParent",
   "FunctionParent",
-  "Pureish",
   "Statement",
   "Conditional",
+  "Expression",
   "Literal",
 ].join("|");
 
