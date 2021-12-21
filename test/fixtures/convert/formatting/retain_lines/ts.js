@@ -1,13 +1,15 @@
 import type { Something } from "Source";
 
-type Another = {
+type SomeType = {
   key: string;
 };
 
+type AnotherType = {
+  key: string;
+};
 /*
  * This is a comment
  */
-
 // Another comment
 
 function Hello() {
