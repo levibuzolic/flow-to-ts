@@ -33,7 +33,7 @@ const transformFunction = (path) => {
 };
 
 const retainLines = (path, state) => {
-  if (!state.options.retainLines) return;
+  if (!state.options.retainLines || path.node.type === "ObjectProperty") return;
   const previous = path.getPrevSibling();
   if (previous == null || previous.node == null || previous.node.loc == null)
     return;
@@ -41,7 +41,7 @@ const retainLines = (path, state) => {
   if (newlines > 0) path.insertBefore(t.noop());
 };
 
-const newlineTypes = [
+const newlineTypesKey = [
   "BlockParent",
   "Conditional",
   "Declaration",
@@ -54,9 +54,7 @@ const newlineTypes = [
   "Scopable",
   "Statement",
   "TypeAlias",
-];
-
-const newlineTypesKey = newlineTypes.join("|");
+].join("|");
 
 export const transform = {
   [newlineTypesKey]: retainLines,

@@ -36,3 +36,14 @@ class Example {
     this.another = 1;
   };
 }
+
+const styles = {
+  container: {
+    alignItems: 'center',
+    marginTop: 5,
+  },
+
+  text: {
+    marginTop: 5,
+  },
+};
