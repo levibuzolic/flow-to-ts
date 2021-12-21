@@ -32,8 +32,9 @@ const transformFunction = (path) => {
   }
 };
 
+const SKIP = ["ObjectMethod", "ObjectProperty", "ObjectMember"];
 const retainLines = (path, state) => {
-  if (!state.options.retainLines || path.node.type === "ObjectProperty") return;
+  if (!state.options.retainLines || SKIP.includes(path.node.type)) return;
   const previous = path.getPrevSibling();
   if (previous == null || previous.node == null || previous.node.loc == null)
     return;
@@ -42,18 +43,17 @@ const retainLines = (path, state) => {
 };
 
 const newlineTypesKey = [
-  "BlockParent",
-  "Conditional",
   "Declaration",
-  "Expression",
-  "Function",
-  "FunctionParent",
-  "Literal",
-  "Property",
-  "Pureish",
-  "Scopable",
-  "Statement",
   "TypeAlias",
+  "Property",
+  "Function",
+  "Scopable",
+  "BlockParent",
+  "FunctionParent",
+  "Pureish",
+  "Statement",
+  "Conditional",
+  "Literal",
 ].join("|");
 
 export const transform = {
